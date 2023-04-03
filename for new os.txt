@@ -10,5 +10,10 @@ reg.exe add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\
 使uwp应用可代理，（取消沙盒），管理员cmd
 FOR /F "tokens=11 delims=\" %p IN ('REG QUERY "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Mappings"') DO CheckNetIsolation.exe LoopbackExempt -a -p=%p
 
-aida64激活码
+aida64激活码，疑似只能给685版本用
 FJUD4-K3TD6-XADTE-7DVD4-47RTI
+
+softwares on windows
+cpuz aida64 furmark crystaldisk
+7zip v2rayn octave/matlab libreoffice 
+dogfight360(SteamCDN_Redir,usbeam) steam++ TK87 RGB-T Driver（t即三模 http://www.ygwaishe.com/）
