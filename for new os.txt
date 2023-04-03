@@ -1,0 +1,14 @@
+禁用 MPO 功能的方法
+转到 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm
+右键单击> 新建> DWORD 32 位值，将新的 DWORD 值命名为 “OverlayTestMode”
+右键单击 OverlayTestMode，将其数值修改为 “00000005” 即可。
+恢复 MPO，只需删除创建的 OverlayTestMode DWORD 即可。
+
+win11右键菜单恢复，powershell管理员
+reg.exe add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+
+使uwp应用可代理，（取消沙盒），管理员cmd
+FOR /F "tokens=11 delims=\" %p IN ('REG QUERY "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Mappings"') DO CheckNetIsolation.exe LoopbackExempt -a -p=%p
+
+aida64激活码
+FJUD4-K3TD6-XADTE-7DVD4-47RTI
