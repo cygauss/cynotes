@@ -1,3 +1,5 @@
+键盘按住shift+F10，弹出cmd命令框，然后输入OOBEBYPASSNRO回车即可跳过联网验证
+
 禁用 MPO 功能的方法
 转到 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm
 右键单击> 新建> DWORD 32 位值，将新的 DWORD 值命名为 “OverlayTestMode”
