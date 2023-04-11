@@ -7,4 +7,5 @@ gentoo，arch的wiki参考性很高
 gentoo中文论坛www.gentoo.site ，电报
 
 slackware中文社区 slackwarecn.github.io
+中文指导github.com/slackwarecn/slackbook_cn
 
