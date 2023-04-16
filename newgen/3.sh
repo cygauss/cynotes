@@ -19,3 +19,11 @@ emerge chrony
 rc-update add chronyd default
 emerge mlocate
 emerge grub
+echo "GRUB_DISABLE_OS_PROBER=false" > /etc/default/grub
+emerge --autounmask-write os-prober
+mkdir /etc/config-archive
+dispatch-conf
+emerge --newuse os-prober
+grub-install --target=x86_64-efi --efi-directory=/boot --removable
+grub--mkconfig -o /boot/grub/grub.cfg
+exit
