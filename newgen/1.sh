@@ -1,3 +1,10 @@
+ntpd -q -g
+wget -L https://mirrors.bfsu.edu.cn/gentoo/releases/amd64/autobuilds/20230409T163155Z/stage3-amd64-desktop-openrc-20230409T163155Z.tar.xz
+tar xpvf stage3-*.tar.xz --xattrs-include='*.*' 
+rm /etc/portage/make.conf
+cd /etc/portage/
+wget -L https://raw.githubusercontent.com/cygauss/cynotes/main/gentoo/make.conf
+cd -
 mkdir --parents /mnt/gentoo/etc/portage/repos.conf
 cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf
 cp --dereference /etc/resolv.conf /mnt/gentoo/etc/
@@ -29,7 +36,9 @@ emerge linux-firmware
 USE="symlink" emerge gentoo-sources
 emerge genkernel
 genkernel --mountboot --save-config --install all
-echo cygen > /etc/hostname
+echo "/dev/nvme2n1p2 /boot vfat defaults,noatime 0 2" > /etc/fstab
+echo "/dev/nvme3n1p1 /     ext4 noatime          0 1" > /etc/fstab
+echo cygen > /etc/hostname 
 emerge dhcpcd
 rc-update add dhcpcd default
 emerge sysklogd
@@ -40,6 +49,4 @@ emerge chrony
 rc-update add chronyd default
 emerge mlocate
 emerge grub
-emerge os-prober
-mkdir /etc/config-archive
-dispatch-conf
+
