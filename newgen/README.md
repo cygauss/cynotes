@@ -1,7 +1,9 @@
-mkfs;mount,cd /mnt/gentoo;wget -L https://raw.githubusercontent.com/cygauss/cynotes/main/newgen
-bash 1.sh
+mkfs;mount,cd /mnt/gentoo;
+wget -L https://raw.githubusercontent.com/cygauss/cynotes/main/newgen/1.sh && bash 1.sh
 chroot /mnt/gentoo
 source /etc/profile
-bash 2.sh
+wget -L https://raw.githubusercontent.com/cygauss/cynotes/main/newgen/2.sh &&bash 2.sh
 env-update && source /etc/profile
-bash 3.sh
+wget -L https://raw.githubusercontent.com/cygauss/cynotes/main/newgen/3.sh &&bash 3.sh
+passwd
+
