@@ -7,6 +7,7 @@ echo "/dev/nvme3n1p1 /     ext4 noatime          0 1" > /etc/fstab
 echo cygen > /etc/hostname 
 emerge dhcpcd
 rc-update add dhcpcd default
+passwd
 rm /etc/conf.d/hwclock
 cd /etc/conf.d
 wget -L https://raw.githubusercontent.com/cygauss/cynotes/main/newgen/hwclock
