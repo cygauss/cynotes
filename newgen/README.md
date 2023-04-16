@@ -13,4 +13,4 @@ umount -l /mnt/gentoo/dev{/shm,/pts,}
 umount -R /mnt/gentoo
 reboot
 
-#硬性修改
+#硬性修改 stage3镜像
