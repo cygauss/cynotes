@@ -12,7 +12,7 @@ reg.exe add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\
 使uwp应用可代理，（取消沙盒），管理员cmd
 FOR /F "tokens=11 delims=\" %p IN ('REG QUERY "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Mappings"') DO CheckNetIsolation.exe LoopbackExempt -a -p=%p
 
-aida64激活码，疑似只能给688版本用
+aida64激活码，疑似只能给688版本用(网上找注册机)
 F5R3D-XUPD6-2FDTC-QD2L4-352W6
 
 softwares on windows
