@@ -15,8 +15,3 @@ mount --rbind /dev /mnt/gentoo/dev
 mount --make-rslave /mnt/gentoo/dev
 mount --bind /run /mnt/gentoo/run
 mount --make-slave /mnt/gentoo/run
-
-chroot /mnt/gentoo /bin/bash
-source /etc/profile
-
-env-update && source /etc/profile
