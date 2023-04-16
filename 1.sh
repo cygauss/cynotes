@@ -8,8 +8,10 @@ mount --rbind /dev /mnt/gentoo/dev
 mount --make-rslave /mnt/gentoo/dev
 mount --bind /run /mnt/gentoo/run
 mount --make-slave /mnt/gentoo/run
+
 chroot /mnt/gentoo /bin/bash
 source /etc/profile
+
 mount /dev/nvme2n1p2 /boot
 emerge-webrsync
 emerge --update --deep --newuse @world
@@ -20,7 +22,9 @@ emerge --config timezone-data
 echo "en_SG.UTF-8 UTF-8" > /etc/locale.gen
 locale-gen
 eselect locale set 4
+
 env-update && source /etc/profile
+
 emerge linux-firmware
 USE="symlink" emerge gentoo-sources
 emerge genkernel
@@ -39,5 +43,3 @@ emerge grub
 emerge os-prober
 mkdir /etc/config-archive
 dispatch-conf
-u
-emerge os-prober
