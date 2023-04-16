@@ -2,8 +2,8 @@ ntpd -q -g
 wget -L https://mirrors.bfsu.edu.cn/gentoo/releases/amd64/autobuilds/20230409T163155Z/stage3-amd64-desktop-openrc-20230409T163155Z.tar.xz
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' 
 cd -
-rm mnt/gentoo/etc/portage/make.conf
-cd mnt/gentoo/etc/portage/
+rm /mnt/gentoo/etc/portage/make.conf
+cd /mnt/gentoo/etc/portage/
 wget -L https://raw.githubusercontent.com/cygauss/cynotes/main/gentoo/make.conf
 cd -
 mkdir --parents /mnt/gentoo/etc/portage/repos.conf
