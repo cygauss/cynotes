@@ -1,3 +1,7 @@
+mkfs.fat -F 32 /dev/nvme2n1p2
+mkfs.ext4 /dev/nvme3n1p1
+mount /dev/nvme3n1p1 /mnt/gentoo
+cd /mnt/gentoo
 ntpd -q -g
 wget -L https://mirrors.bfsu.edu.cn/gentoo/releases/amd64/autobuilds/20230409T163155Z/stage3-amd64-desktop-openrc-20230409T163155Z.tar.xz
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' 
