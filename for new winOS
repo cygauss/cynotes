@@ -20,3 +20,7 @@ amd 22.11.2
 cpuz aida64 furmark crystaldisk
 7zip v2rayn octave/matlab libreoffice texmacs（见tex文件）
 dogfight360(SteamCDN_Redir,usbeam) steam++ TK87 RGB-T Driver（t即三模 http://www.ygwaishe.com/）logitech ghub
+
+windows换utc
+reg定位到计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation 目录下，
+新建一个 DWORD 类型，名称为 RealTimeIsUniversal 的键，并修改键值为 1 即可。
