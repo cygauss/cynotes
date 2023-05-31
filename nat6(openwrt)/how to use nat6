@@ -1,0 +1,72 @@
+有些设置步骤是多余的, 可以保持默认（关闭勾选内置ipv6管理);
+WAN/WAN6/LAN 使用默认网关
+WAN6 DHCPV6客户端,请求ipv6地址设置多试，看校园网怎么分配，请求指定长度的ipv6前缀设定为停用
+LAN将ipv6分配长度设定为64 动态DHCP， ipv6设置路由通告服务和DHCPv6服务选择选择服务器模式，NDP代理选择停用，DHCPv6模式选择无状态的+有状态的
+tips:新版的ESIR，默认没有 ULA，要显示全局网络选项的话，/etc/config/network文件里添加一行 config globals 'globals'并设置fd开头ip https://cd34.com/rfc4193/
+
+DHCP和DNS中取消禁止解析ipv6 DNS记录。
+
+注意：NAT6只是给校园网用户用的。你的家庭宽带也支持 IPv6，但绝对不要用本贴的办法，直接使用 OpenWRT 默认设置即可完美支持 IPv6。
+
+
+
+reference to https://www.right.com.cn/forum/thread-198647-1-1.html
+https://www.right.com.cn/forum/thread-2661027-1-1.html (本贴是对上贴的修正)
+https://zhuanlan.zhihu.com/p/492774540
+
+第一步：这一步是更新软件源并安装这两个软件包。有些第三方 OpenWRT 自带，注意看提示。
+
+opkg update
+
+opkg install ip6tables
+
+opkg install kmod-ipt-nat6
+
+第二步：这一步是将 IPv6 LAN 内网地址由 fd 开头变成 dd 开头。即修改为RFC协议中规定的Reserved地址段。
+
+uci set network.globals.ula_prefix="$(uci get network.globals.ula_prefix | sed 's/^./d/')"
+
+uci commit network
+
+家庭用户注意：你们宽带的 IPv6 LAN 内网地址不应该是 f 开头，应该是 2 开头，由 DHCPv6-PD 申请。如果不是，你的宽带的IPv6就配错了。内网 IPv6 是极特殊用途的。再次注意，此步骤不适用于家庭宽带，除非你家光猫处于路由模式且不支持 DHCPv6-PD且你无法修改光猫设置时才能使用此办法。
+
+第三步：让DHCP服务器总是通告默认路由。
+
+uci set dhcp.lan.ra_default='1'
+
+uci commit dhcp
+
+第四步：保存脚本为/etc/init.d/nat6
+
+第五步：让 nat6 脚本开机启动
+
+chmod +x /etc/init.d/nat6
+
+/etc/init.d/nat6 enable
+
+第六步：这一步可省略。luci防火墙设置貌似会被覆盖，不用管。In addition, you may now disable the default firewall rule "Allow-ICMPv6-Forward" since it's not needed when masquerading is enabled
+
+uci set firewall.@rule["$(uci show firewall | grep 'Allow-ICMPv6-Forward' | cut -d'[' -f2 | cut -d']' -f1)"].enabled='0'
+
+uci commit firewall
+
+第七步：修改 /etc/sysctl.conf 文件，修改以下内容，没有的话就添加
+
+net.ipv6.conf.default.forwarding=2
+
+net.ipv6.conf.all.forwarding=2
+
+net.ipv6.conf.default.accept_ra=2
+
+net.ipv6.conf.all.accept_ra=2
+这一步必做。内核选项最好在 sysctl.conf 文件里改了，而不是看到 nat6 脚本里有了就不做了，否则可能失败。
+
+第八步：重启路由器
+
+tips:注意换行符必须是LF
+注意，在更新的OpenWRT里（如OpenWRT 21），有一处地方又发生了变化
+文件的 $(uci get "network.$WAN6_NAME.ifname") 可能需要改成 $(uci get "network.$WAN6_NAME.device") 才能生效
+因此我进一步改了脚本 改成了 $(uci get "network.$WAN6_NAME.device" || uci get "network.$WAN6_NAME.ifname")
+或者你可以直接把 WAN6_INTERFACE=$(uci get "network.$WAN6_NAME.ifname") 替换为 WAN6_INTERFACE=wan，其中wan为WAN6对应的网络设备名
+
+tips:脚本中有写fork时修改的地方和原因
