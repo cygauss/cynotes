@@ -1,7 +1,7 @@
 有些设置步骤是多余的, 可以保持默认（关闭勾选内置ipv6管理);
 WAN/WAN6/LAN 使用默认网关
 WAN6 DHCPV6客户端,请求ipv6地址设置多试，看校园网怎么分配，请求指定长度的ipv6前缀设定为停用
-LAN将ipv6分配长度设定为64 动态DHCP， ipv6设置路由通告服务和DHCPv6服务选择选择服务器模式，NDP代理选择停用，DHCPv6模式选择无状态的+有状态的
+LAN将ipv6分配长度设定为64 动态DHCP， ipv6设置路由通告服务,DHCPv6服务，NDP代理选择停用
 tips:新版的ESIR，默认没有 ULA，要显示全局网络选项的话，/etc/config/network文件里添加一行 config globals 'globals'并设置fd开头ip https://cd34.com/rfc4193/
 
 DHCP和DNS中取消禁止解析ipv6 DNS记录。
