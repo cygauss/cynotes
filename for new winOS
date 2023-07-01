@@ -24,3 +24,13 @@ dogfight360(SteamCDN_Redir,usbeam) steam++ TK87 RGB-T Driver（t即三模 http:/
 windows换utc
 reg定位到计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation 目录下，
 新建一个 DWORD 类型，名称为 RealTimeIsUniversal 的键，并修改键值为 1 即可。
+
+http://blog.yogi-way.lv/2013/01/ipv6-and-slaac.html将接受slaac分发给停止
+
+netsh interface ipv6 show interface
+netsh interface ipv6 set interface X routerdiscovery=disabled
+#where X is desired interface index from the show command output.
+
+#To disable privacy execute (command works globally for all interfaces):
+netsh interface ipv6 set privacy state=disable store=persistent
+netsh interface ipv6 set global randomizeidentifiers=disabled store=persistent
